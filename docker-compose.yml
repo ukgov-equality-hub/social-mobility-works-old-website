@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  smw_old_website_db:
+    container_name: "smw_old_website_db"
+    image: mysql:8.2
+    restart: unless-stopped
+    ports:
+      - target: 3306      # The port in the container
+        published: 3306   # The port on the host machine (your laptop)
+    environment:
+      MYSQL_DATABASE: smw_old_website_db
+      MYSQL_USER: smw_old_website_user
+      MYSQL_PASSWORD: smw_old_website_pass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - type: volume
+        source: smw_old_website_db_volume
+        target: /var/lib/mysql
+
+  smw_old_website_app:
+    container_name: "smw_old_website_app"
+    build:                    # This service is built using a Dockerfile (rather than downloaded as a pre-built image)
+      dockerfile: Dockerfile  # This service uses the default Dockerfile as its specification (this is the default, but good to know!)
+    environment:
+      DB_HOST: smw_old_website_db
+    ports:
+      - target: 8080      # The port in the container
+        published: 8080   # The port on the host machine (your laptop)
+    volumes:
+      - type: bind
+        source: ./                # The directory on the host machine (your laptop)
+        target: /var/www/html    # The directory this is mounted to inside the container
+    depends_on:
+      - smw_old_website_db
+
+volumes:
+  smw_old_website_db_volume:
