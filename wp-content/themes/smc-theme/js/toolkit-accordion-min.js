@@ -1,0 +1,1 @@
+jQuery((function(){var t=jQuery("button.accordion");jQuery(t).on("click",(function(t){t.preventDefault(),this.classList.toggle("active");var e=this.nextElementSibling;e.style.maxHeight?e.style.maxHeight=null:e.style.maxHeight=e.scrollHeight+"px"}))}));

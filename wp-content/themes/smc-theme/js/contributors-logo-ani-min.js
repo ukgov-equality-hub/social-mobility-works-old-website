@@ -1,0 +1,1 @@
+jQuery((function(){!function(){var o=jQuery("#contributors-logo-pane .logoWrapper").length,e=new TimelineMax({repeat:-1});for(i=0;i<o;i++){var r="#contributors-logo-pane .logoWrapper"+(i+1)+" .contributorLogo";e.staggerTo(r,.6,{opacity:1,y:"-=5px",ease:Power4.easeOut},.15),e.staggerTo(r,.4,{opacity:0,ease:Power0.easeNone},.3,"+=3")}}()}));
